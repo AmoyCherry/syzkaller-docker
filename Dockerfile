@@ -18,7 +18,11 @@ RUN cd /syzkaller && \
 
 # Copy Linux build files and scripts
 COPY data/bzImage /kernel/bzImage
-COPY data/bullseye.img /kernel/bullseye.img
+
+COPY data/image/bullseye.img /kernel/image/bullseye.img
+COPY data/image/bullseye.id.rsa /kernel/image/bullseye.id.rsa
+COPY data/image/bullseye.id.rsa.pub /kernel/image/bullseye.id.rsa.pub
+
 COPY qemu.cfg /syzkaller/qemu.cfg
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
