@@ -1,1 +1,12 @@
 # syzkaller-docker
+-- syzkaller-docker
+|------ Dockerfile.syzkaller
+|------ syzkaller-data
+|---------- bullseye.id_rsa
+|---------- bullseye.id_rsa.pub
+|---------- bullseye.img
+|---------- bzImage
+|---------- vmlinux
+-- syzllm-docker
+|------ Dockerfile.syzllm
+|------ fuzz-with-syzllm

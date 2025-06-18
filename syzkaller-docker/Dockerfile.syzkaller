@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+FROM golang:1.23.7
+
 # Install dependencies for syzkaller and QEMU
 RUN apt-get update && apt-get install -y \
     git \
@@ -8,20 +10,20 @@ RUN apt-get update && apt-get install -y \
     golang \
     && rm -rf /var/lib/apt/lists/*
 
-# Clone and build syzkaller
-RUN git clone https://github.com/google/syzkaller.git /syzkaller && \
-    cd /syzkaller && \
-    make
+COPY syzkaller_with_syzllm/ syzkaller
 
 RUN cd /syzkaller && \
     mkdir workdir
 
 # Copy Linux build files and scripts
-COPY data/bzImage /kernel/bzImage
+COPY syzkaller-data/bzImage /kernel/bzImage
+COPY syzkaller-data/vmlinux /kernel/vmlinux
 
-COPY data/image/bullseye.img /kernel/image/bullseye.img
-COPY data/image/bullseye.id.rsa /kernel/image/bullseye.id.rsa
-COPY data/image/bullseye.id.rsa.pub /kernel/image/bullseye.id.rsa.pub
+COPY syzkaller-data/bullseye.img /kernel/image/bullseye.img
+COPY syzkaller-data/bullseye.id.rsa /kernel/image/bullseye.id.rsa
+COPY syzkaller-data/bullseye.id.rsa.pub /kernel/image/bullseye.id.rsa.pub
+
+RUN chmod 0600 /kernel/image/bullseye.id.rsa
 
 COPY qemu.cfg /syzkaller/qemu.cfg
 COPY run.sh /run.sh

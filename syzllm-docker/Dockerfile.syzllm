@@ -1,0 +1,34 @@
+# Use an official Python runtime as a parent image
+# python:3.9-slim-buster provides a smaller image size for production environments
+FROM python:3.9-slim-buster
+
+# Set the working directory inside the container
+# All subsequent commands will run from this directory
+WORKDIR /app
+
+# Install system dependencies if any (none explicitly needed for current Python libraries, but good practice)
+# For example: RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies directly within the Dockerfile
+# Using --no-cache-dir to reduce image size
+RUN pip install --no-cache-dir flask transformers torch
+
+# Create directories for logs as per your application's `ServerLogPath`
+# Assuming ServerLogPath points to 'server_logs/'
+RUN mkdir -p server_logs
+
+# Copy the entire 'syzllm' directory into the /app directory in the container.
+# This assumes 'syzllm' contains server.py, syz_tokenizer.py, utils.py,
+# model_files/ (with model files), and tokenizer_vocab.txt.
+# The contents of 'syzllm' will be placed directly into /app.
+COPY fuzz-with-syzllm/ .
+
+# Expose the port that the Flask application will be listening on.
+# This informs Docker that the container listens on the specified network port at runtime.
+EXPOSE 6678
+
+# Define the command to run your server application.
+# `python server.py` will execute the Flask app.
+# The server is configured to run on '0.0.0.0' inside the container,
+# which allows it to accept connections from outside the container.
+CMD ["python", "server.py"]
