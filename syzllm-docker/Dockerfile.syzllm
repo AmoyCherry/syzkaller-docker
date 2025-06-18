@@ -21,7 +21,7 @@ RUN mkdir -p server_logs
 # This assumes 'syzllm' contains server.py, syz_tokenizer.py, utils.py,
 # model_files/ (with model files), and tokenizer_vocab.txt.
 # The contents of 'syzllm' will be placed directly into /app.
-COPY fuzz-with-syzllm/ .
+COPY fuzz-with-LLM/ .
 
 # Expose the port that the Flask application will be listening on.
 # This informs Docker that the container listens on the specified network port at runtime.
