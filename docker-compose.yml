@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  syzllm-server:
+    build:
+      context: .
+      dockerfile: ./syzllm-docker/Dockerfile.syzllm
+    container_name: syzllm-server
+    # You still need to publish the port if you want to access it from your host machine (e.g., browser)
+    ports:
+      - "6678:6678" # Host_Port:Container_Port - Map host port 6678 to container port 6678
+    environment:
+      - PORT=6678
+      - SERVER_ID=syzllm-server
+    networks:
+      - my_http_network # Assign to a custom network
+
+  syzkaller:
+    build:
+      context: .
+      dockerfile: Dockerfile.syzkaller
+    container_name: syzkaller
+    environment:
+      - CLIENT_ID=Client-1
+      # *** KEY CHANGE HERE ***
+      - SERVER_HOST=syzllm-server # Use the service name of the server container
+      - SERVER_PORT=6678     # The internal port the server is listening on (from its EXPOSE or app.run)
+    depends_on:
+      - syzllm-server
+    networks:
+      - my_http_network # Assign to the same custom network
+
+networks:
+  my_http_network:
+    driver: bridge
