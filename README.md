@@ -1,6 +1,7 @@
 # syzkaller-docker
 -- syzkaller-docker
 |------ Dockerfile.syzkaller
+|------ syzkaller_with_syzllm
 |------ syzkaller-data
 |---------- bullseye.id_rsa
 |---------- bullseye.id_rsa.pub
