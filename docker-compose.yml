@@ -18,7 +18,7 @@ services:
   syzkaller:
     build:
       context: .
-      dockerfile: Dockerfile.syzkaller
+      dockerfile: ./syzkaller-docker/Dockerfile.syzkaller
     container_name: syzkaller
     environment:
       - CLIENT_ID=Client-1

@@ -10,18 +10,18 @@ RUN apt-get update && apt-get install -y \
     golang \
     && rm -rf /var/lib/apt/lists/*
 
-COPY syzkaller_with_syzllm/ syzkaller
+COPY syzkaller-docker/syzkaller_with_syzllm/ syzkaller
 
 RUN cd /syzkaller && \
     mkdir workdir
 
 # Copy Linux build files and scripts
-COPY syzkaller-data/bzImage /kernel/bzImage
-COPY syzkaller-data/vmlinux /kernel/vmlinux
+COPY syzkaller-docker/syzkaller-data/bzImage /kernel/bzImage
+COPY syzkaller-docker/syzkaller-data/vmlinux /kernel/vmlinux
 
-COPY syzkaller-data/bullseye.img /kernel/image/bullseye.img
-COPY syzkaller-data/bullseye.id.rsa /kernel/image/bullseye.id.rsa
-COPY syzkaller-data/bullseye.id.rsa.pub /kernel/image/bullseye.id.rsa.pub
+COPY syzkaller-docker/syzkaller-data/bullseye.img /kernel/image/bullseye.img
+COPY syzkaller-docker/syzkaller-data/bullseye.id.rsa /kernel/image/bullseye.id.rsa
+COPY syzkaller-docker/syzkaller-data/bullseye.id.rsa.pub /kernel/image/bullseye.id.rsa.pub
 
 RUN chmod 0600 /kernel/image/bullseye.id.rsa
 
