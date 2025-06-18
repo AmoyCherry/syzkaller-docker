@@ -25,8 +25,8 @@ COPY syzkaller-docker/syzkaller-data/bullseye.id.rsa.pub /kernel/image/bullseye.
 
 RUN chmod 0600 /kernel/image/bullseye.id.rsa
 
-COPY syzkaller-data/eval.cfg /syzkaller/qemu.cfg
-COPY run.sh /run.sh
+COPY syzkaller-docker/syzkaller-data/eval.cfg /syzkaller/qemu.cfg
+COPY syzkaller-docker/run.sh /run.sh
 RUN chmod +x /run.sh
 
 # Set entrypoint to run syzkaller with QEMU
