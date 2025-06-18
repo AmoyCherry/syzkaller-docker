@@ -31,4 +31,4 @@ EXPOSE 6678
 # `python server.py` will execute the Flask app.
 # The server is configured to run on '0.0.0.0' inside the container,
 # which allows it to accept connections from outside the container.
-CMD ["python", "server.py"]
+CMD ["python", "./syzLLM_server.py"]
