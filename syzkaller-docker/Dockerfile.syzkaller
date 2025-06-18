@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     golang \
     && rm -rf /var/lib/apt/lists/*
 
-COPY syzkaller-docker/syzkaller_with_syzllm/ syzkaller
+COPY syzkaller-docker/syzkaller_with_syzllm/ /syzkaller
 
 RUN cd /syzkaller && \
     mkdir workdir
