@@ -25,7 +25,7 @@ COPY syzkaller-data/bullseye.id.rsa.pub /kernel/image/bullseye.id.rsa.pub
 
 RUN chmod 0600 /kernel/image/bullseye.id.rsa
 
-COPY qemu.cfg /syzkaller/qemu.cfg
+COPY syzkaller-data/eval.cfg /syzkaller/qemu.cfg
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
