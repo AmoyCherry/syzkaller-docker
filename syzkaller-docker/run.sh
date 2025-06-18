@@ -1,2 +1,2 @@
 #!/bin/bash
-/syzkaller/bin/syz-manager -config /syzkaller/qemu.cfg
+/syzkaller/bin/syz-manager -config /syzkaller/qemu.cfg &> log.txt
