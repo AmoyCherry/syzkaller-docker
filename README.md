@@ -11,3 +11,14 @@
 -- syzllm-docker
 |------ Dockerfile.syzllm
 |------ fuzz-with-syzllm
+
+Commands
+
+Pack
+docker save -o all_syzllm_images.tar syzkaller-docker-syzkaller:latest syzkaller-docker-syzllm-server:latest
+
+Load
+docker load -i /path/on/target/machine/all_syzllm_images.tar
+
+Run
+docker compose up -d
