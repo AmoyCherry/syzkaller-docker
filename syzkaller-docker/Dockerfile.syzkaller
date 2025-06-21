@@ -23,7 +23,7 @@ COPY syzkaller-docker/syzkaller-data/bullseye.img /kernel/image/bullseye.img
 COPY syzkaller-docker/syzkaller-data/bullseye.id_rsa /kernel/image/bullseye.id_rsa
 COPY syzkaller-docker/syzkaller-data/bullseye.id_rsa.pub /kernel/image/bullseye.id_rsa.pub
 
-RUN chmod 0600 /kernel/image/bullseye.id.rsa
+RUN chmod 0600 /kernel/image/bullseye.id_rsa
 
 COPY syzkaller-docker/syzkaller-data/fuzzing.cfg /syzkaller/qemu.cfg
 COPY syzkaller-docker/run.sh /run.sh
