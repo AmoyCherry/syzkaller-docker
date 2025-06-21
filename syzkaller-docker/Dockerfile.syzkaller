@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
 COPY syzkaller-docker/syzkaller_with_syzllm/ /syzkaller
 
 RUN cd /syzkaller && \
-    mkdir workdir
+    mkdir workdir && \
+    make
 
 # Copy Linux build files and scripts
 COPY syzkaller-docker/syzkaller-data/bzImage /kernel/bzImage
