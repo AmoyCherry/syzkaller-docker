@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
 COPY syzkaller-docker/syzkaller_with_syzllm/ /syzkaller
 
 RUN cd /syzkaller && \
-    make
-COPY syzkaller-docker/syzkaller-data/workdir /syzkaller/workdir
+    make && \
+    mkdir workdir
 
 # Copy Linux build files and scripts
 COPY syzkaller-docker/syzkaller-data/linux /home/parallels/fuzz/production/linux
@@ -26,7 +26,7 @@ COPY syzkaller-docker/syzkaller-data/bullseye.id_rsa.pub /image/bullseye.id_rsa.
 RUN cd /image/ && \
     chmod 0600 bullseye.id_rsa
 
-COPY syzkaller-docker/syzkaller-data/qemu.cfg /syzkaller/qemu.cfg
+COPY syzkaller-docker/syzkaller-data/eval.cfg /syzkaller/qemu.cfg
 COPY syzkaller-docker/run.sh /run.sh
 RUN chmod +x /run.sh
 
