@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-FROM golang:1.23.7
+FROM golang:1.24.4
 
 # Install dependencies for syzkaller and QEMU
 RUN apt-get update && apt-get install -y \
